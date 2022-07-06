@@ -18,11 +18,11 @@ using Terraform script.
 
 5 Associate Subnet with a [Route Table](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table_association)
 
-6 Create Security Group for communication on ports 22,80,44
+6 Create [Security Group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) for communication via SSH, HTTP, HTTPS
 
-7 Create a Network Interface with an IP in set subnet 
+7 Create a [Network Interface](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_interface) with an IP in set subnet 
 
-8 Assign an elastic IP to the set network interface 
+8 Assign an [elastic IP](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip) to the set network interface 
 
 9 Create Ubuntu server and install and enable web server
 
