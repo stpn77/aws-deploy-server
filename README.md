@@ -16,7 +16,7 @@ using Terraform script.
 
 4 Create a [Subnet](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet)
 
-5 Associate Subnet with a Route Table
+5 Associate Subnet with a [Route Table](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table_association)
 
 6 Create Security Group for communication on ports 22,80,44
 
