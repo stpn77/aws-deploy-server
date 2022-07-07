@@ -10,16 +10,14 @@ resource "tls_private_key" "this" {
   rsa_bits  = 4096
 }   
 
-
-output "private_key" {
-  value     = tls_private_key.this.id
-  sensitive = true
-}
-
-# Set the key
+# Set the key and output the key to key.pem 
 resource "aws_key_pair" "this" {
   key_name   = "key"
   public_key = tls_private_key.this.public_key_openssh
+
+  provisioner "local-exec" { 
+command = "echo '${tls_private_key.this.private_key_pem}' > myKey.pem && chmod 400 myKey.pem"
+}
 }
 
 # Create vpc
@@ -136,18 +134,12 @@ resource "aws_instance" "this" {
     availability_zone = "eu-central-1a"
     key_name = aws_key_pair.this.key_name
 
+    user_data = "${file("script.sh")}" 
+
     network_interface {
         device_index = 0
         network_interface_id = aws_network_interface.this.id
     }
-
-    user_data = <<-EOF
-        #!/bin/bash
-        sudo apt update
-        sudo apt install apache2
-        sudo systemctl start apache2
-        sudo curl https://github.com/stpn77/aws-deploy-server/index.html > /var/www/html/index.html
-        EOF
 
     tags = {
       Name = "web-server"
