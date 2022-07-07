@@ -4,7 +4,15 @@ Purpose of the repo is to demonstrate, how to deploy web server running on AWS i
 using Terraform script.
 
 **Prequisities**
-~~1 create key pair via [AWS interface](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-key-pairs.html)~~ Included in script.
+
+1 Install [Terraform](https://www.terraform.io/downloads)
+
+2 Install [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+
+3 Configure [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+
+~~create key pair via [AWS interface](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-key-pairs.html)~~ Included in script.
+
 
 **Process**
 
@@ -26,5 +34,5 @@ using Terraform script.
 
 9 Assign an [elastic IP](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip) to the set network interface 
 
-10 Create Ubuntu server and install and enable web server
+10 Create Ubuntu server and install and enable web server using [bash script file](https://registry.terraform.io/providers/serverscom/serverscom/latest/docs/guides/user-data)
 
