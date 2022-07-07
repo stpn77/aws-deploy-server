@@ -96,8 +96,8 @@ resource "aws_security_group" "allow_traffic" {
 
    ingress {
     description      = "HTTPS"
-    from_port        = 443
-    to_port          = 443
+    from_port        = 503
+    to_port          = 503
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
   }
@@ -110,7 +110,7 @@ resource "aws_security_group" "allow_traffic" {
   }
 
   tags = {
-    Name = "allow_22_80_443"
+    Name = "allow_22_80_503"
   }
 }
 
@@ -125,7 +125,7 @@ resource "aws_network_interface" "this" {
 resource "aws_eip" "this" {
   vpc                       = true
   network_interface         = aws_network_interface.this.id
-  associate_with_private_ip = "10.0.0.44"
+  associate_with_private_ip = "10.0.1.44"
   depends_on = [aws_internet_gateway.this]
   }
 
