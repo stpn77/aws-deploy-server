@@ -16,7 +16,7 @@ resource "aws_key_pair" "this" {
   public_key = tls_private_key.this.public_key_openssh
 
   provisioner "local-exec" { 
-command = "echo '${tls_private_key.this.private_key_pem}' > myKey.pem && chmod 400 myKey.pem"
+command = "echo '${tls_private_key.this.private_key_pem}' > myKey.pem && chmod 600 myKey.pem"
 }
 }
 
