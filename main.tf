@@ -1,8 +1,3 @@
-# Provider info
-provider "aws" {
-  region = "eu-central-1"
-}
-
 # Create the key
 
 resource "tls_private_key" "this" {
@@ -10,14 +5,16 @@ resource "tls_private_key" "this" {
   rsa_bits  = 4096
 }   
 
+resource "local_file" "private_key" {
+  content = tls_private_key.this.private_key_pem
+    filename = "myKey.pem"
+    file_permission = "0600"
+}
+
 # Set the key and output the key to key.pem 
 resource "aws_key_pair" "this" {
   key_name   = "key"
   public_key = tls_private_key.this.public_key_openssh
-
-  provisioner "local-exec" { 
-command = "echo '${tls_private_key.this.private_key_pem}' > myKey.pem && chmod 600 myKey.pem"
-}
 }
 
 # Create vpc
@@ -73,7 +70,6 @@ resource "aws_route_table_association" "this" {
 # Create Security Group to allow HTTP,HTTPS,SSH, IPv4 only
 resource "aws_security_group" "allow_traffic" {
   name        = "allow_http"
-  description = "Allow HTTP traffice"
   vpc_id      = aws_vpc.this.id
 
   ingress {
