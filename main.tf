@@ -1,10 +1,11 @@
 # Create the key
-
+# Define type of key
 resource "tls_private_key" "this" {
   algorithm = "RSA"
   rsa_bits  = 4096
 }   
 
+# Define file to store the key and permissions
 resource "local_file" "private_key" {
   content = tls_private_key.this.private_key_pem
     filename = "myKey.pem"
